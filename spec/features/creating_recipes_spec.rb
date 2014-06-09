@@ -11,6 +11,12 @@ feature 'Creating Recipes' do
     click_button 'Create Recipe'
 
     expect(page).to have_content('Recipe has been created.')
+
+    recipe = Recipe.where(name: "Mud Pies").first
+    expect(page.current_url).to eql(recipe_url(recipe))
+
+    title = "Mud Pies Recipe, VMC Cookbook"
+    expect(page).to have_title(title), "expected page title: #{title}, but  title is: #{page.title}"
   end
 end
   
